@@ -1,2 +1,2 @@
-# inventario-tienda
+# reserva de consultas medicas
 test repo
