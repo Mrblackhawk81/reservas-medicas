@@ -309,3 +309,83 @@ footer > div:last-child {
 
     padding-top: 20px;
 }
+
+
+@media (max-width: 768px) {
+
+    header {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 20px;
+
+        padding: 20px;
+    }
+
+    .logo {
+
+        justify-content: center;
+
+        font-size: 2rem;
+    }
+
+    #main-nav {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 18px;
+
+        width: 100%;
+    }
+
+    #main-nav a {
+
+        font-size: 1.1rem;
+    }
+
+    .btn-started {
+
+        width: 220px;
+
+        text-align: center;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .footer-content{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .btn,
+    .btn-started{
+
+        width:100%;
+
+        text-align:center;
+    }
+
+}
+
+@media(max-width:768px){
+
+    #contacto p{
+
+        text-align:center;
+    }
+
+}
