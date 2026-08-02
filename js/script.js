@@ -12,3 +12,10 @@ button.addEventListener("click", () => {
     }
 
 });
+
+const menuBtn = document.getElementById("menu-links");
+const navLinks = document.getElementById("main-nav");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
