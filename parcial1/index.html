@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe El Trigal</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <header id="inicio">
+        <h1>Cafe El Trigal</h1>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#cafe">Nuestro Café</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cafe">
+            <h2>Nuestro Café</h2>
+            <p>
+                Somos una cafetería de barrio donde preparamos café fresco
+                todos los días para acompañar tus mañanas y tardes.
+            </p>
+
+            <ul>
+                <li>Cafe - 12bs</li>
+                <li>Capuchino - 18bs</li>
+                <li>Submarino - 15bs</li>
+            </ul>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+
+            <form>
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" required>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" required>
+
+                <label for="pedido">Tu pedido:</label>
+                <textarea id="pedido" rows="4" required></textarea>
+            </form>
+                <button type="button" id="btn-confirmar">Confirmar pedido</button>
+                
+                <p id="mensaje" class="oculto"></p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Parcial 1 - Cristian Israel Alarcon Saigua - 3 de agosto de 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
