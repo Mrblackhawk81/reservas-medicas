@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heladería Doña Nieve</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Heladería Doña Nieve</h1>
+        <p>Bienvenidos a nuestra heladería. Completá el formulario para hacer tu pedido.</p>
+    </header>
+
+    <main>
+        <form id="form-helados" novalidate method="POST" action="procesar.php">
+
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required
+                   autocomplete="name" placeholder="Nombre completo">
+
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" required
+                   autocomplete="email" placeholder="Ej.: example@correo.com">
+
+            <label for="sabores">Qué sabores quieres</label>
+            <textarea id="sabores" name="sabores" rows="4"></textarea>
+
+            <button type="submit">Enviar mi pedido</button>
+
+            <p id="aviso-helados" class="aviso"></p>
+
+        </form>
+    </main>
+
+    <footer>
+        Parcial 2 - Cristian Israel Alarcon Saigua - 11 de agosto de 2026
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
