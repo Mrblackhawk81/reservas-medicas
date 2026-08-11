@@ -71,10 +71,65 @@
         </section>
 
         <section id="contacto">
+
             <h2>Contacto</h2>
-            <p>Email: contacto@medcenter.com</p>
-            <p>Teléfono: +00 000 000 000</p>
-            <p>Dirección: Calle123, Ciudad</p>
+
+            <p>
+                ¿Tienes alguna pregunta? Envíanos un mensaje.
+            </p>
+
+            <form method="POST" action="procesar.php">
+
+                <div class="form-group">
+
+                    <label for="nombre">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Tu nombre">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="correo@ejemplo.com">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="mensaje">
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows="5"
+                        placeholder="Escribe tu mensaje"></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn">
+                    Enviar mensaje
+                </button>
+
+            </form>
+
         </section>
 
     </main>

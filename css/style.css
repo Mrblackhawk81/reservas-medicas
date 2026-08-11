@@ -81,7 +81,7 @@ header{
 }
 
 #main-nav a:hover{
-    color:#fff;
+    color:#145964;
 }
 
 .menu-btn{
@@ -148,8 +148,7 @@ section h2{
     box-shadow:var(--shadow);
 }
 
-#nosotros p,
-#contacto p{
+#nosotros p{
     max-width:800px;
     margin:auto;
     text-align:center;
@@ -227,6 +226,75 @@ body.oscuro header{
     background:#2c2c2c;
 }
 
+#contacto form{
+    max-width:700px;
+
+    margin:40px auto 0;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:20px;
+}
+
+#contacto form .form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+#contacto form label{
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:var(--primary-dark);
+}
+
+#contacto form input,
+#contacto form textarea{
+    width:100%;
+
+    padding:12px 15px;
+
+    font-family:inherit;
+    font-size:1rem;
+
+    border:1px solid #c8dfe3;
+    border-radius:8px;
+
+    background:var(--light);
+    color:var(--text);
+
+    transition:.3s;
+}
+
+#contacto form textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+#contacto form input:focus,
+#contacto form textarea:focus{
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(83,168,182,.15);
+}
+
+#contacto form input::placeholder,
+#contacto form textarea::placeholder{
+    color:#8a9a9e;
+}
+
+#contacto form .btn{
+    border:none;
+
+    align-self:center;
+
+    min-width:180px;
+}
+
 @media (max-width:768px){
 
     header{
@@ -241,19 +309,27 @@ body.oscuro header{
 
     .menu-btn{
         display:block;
+
         background:none;
         border:none;
+
         font-size:2rem;
+
         color:var(--primary-dark);
+
         cursor:pointer;
     }
 
     #main-nav{
         display:none;
+
         flex-direction:column;
         align-items:center;
+
         width:100%;
+
         gap:18px;
+
         margin-top:15px;
     }
 
@@ -263,8 +339,11 @@ body.oscuro header{
 
     #main-nav a{
         width:100%;
+
         text-align:center;
+
         padding:10px 0;
+
         font-size:1.1rem;
     }
 
@@ -278,5 +357,13 @@ body.oscuro header{
     .footer-content{
         flex-direction:column;
         text-align:center;
+    }
+
+    #contacto form{
+        width:100%;
+    }
+
+    #contacto form .btn{
+        width:100%;
     }
 }
