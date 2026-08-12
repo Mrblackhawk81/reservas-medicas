@@ -9,19 +9,19 @@ function validarPedido(event) {
 
     if (nombre === "" || correo === "") {
         event.preventDefault();
-        aviso.textContent = "complete su nombre y su correo para hacer el pedido.";
+        aviso.textContent = "Falta tu nombre o tu correo - sin eso no podemos anotar el pedido.";
         aviso.classList.add("error");
-        aviso.classList.remove("ok");
+        aviso.classList.remove("exito");
 
     } else if (!correo.includes("@")) {
         event.preventDefault();
-        aviso.textContent = "Revisá el correo: le falta la @.";
+        aviso.textContent = "Ese correo no tiene arroba - revísalo por favor.";
         aviso.classList.add("error");
-        aviso.classList.remove("ok");
+        aviso.classList.remove("exito");
 
     } else {
-        aviso.textContent = "¡Pedido enviado con éxito! - Cristian Israel Alarcón Saigua";
-        aviso.classList.add("ok");
+        aviso.textContent = "Pedido anotado - te atiende Cristian Israel Alarcon Saigua";
+        aviso.classList.add("exito");
         aviso.classList.remove("error");
     }
 }
