@@ -19,47 +19,36 @@
                     <p>Accede a tu cuenta para gestionar tus citas medicas.</p>
                 </header>
 
-                <form id="login-form" method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="email"> Correo electrónico </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="correo@ejemplo.com"
-                            autocomplete="email"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password"> Contraseña </label>
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="********"
-                            autocomplete="current-password"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-options">
-                        <label>
-                            <input type="checkbox" id="remember" name="remember" />
-                            Recordarme
-                        </label>
-
-                        <a href="#"> ¿Olvidaste tu contraseña? </a>
-                    </div>
-
-                    <a href="{{ route('dashboard') }}" class="btn-primary">Iniciar sesión</a>
-
-                    <p id="login-message"></p>
-                </form>
+                <form id="login-form" method="POST" action="{{ route('login.post') }}">
+    @csrf
+    @if(session('login_error'))
+        <p style="color:red;">{{ session('login_error') }}</p>
+    @endif
+    @if($errors->any())
+        <ul style="color:red;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+    <div class="form-group">
+        <label for="email"> Correo electrónico </label>
+        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" autocomplete="email" required />
+    </div>
+    <div class="form-group">
+        <label for="password"> Contraseña </label>
+        <input type="password" id="password" name="password" placeholder="********" autocomplete="current-password" required />
+    </div>
+    <div class="form-options">
+        <label>
+            <input type="checkbox" id="remember" name="remember" />
+            Recordarme
+        </label>
+        <a href="#"> ¿Olvidaste tu contraseña? </a>
+    </div>
+    <button type="submit" class="btn-primary">Iniciar sesión</button>
+    <p id="login-message"></p>
+</form>
 
                 <footer class="login-footer">
                     <p>

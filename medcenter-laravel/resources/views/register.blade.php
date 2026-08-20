@@ -19,8 +19,15 @@
                     <p>Regístrate para comenzar a gestionar tus citas médicas.</p>
                 </header>
 
-                <form id="register-form" method="POST" action="{{ route('register') }}">
-                    @csrf
+                <form id="register-form" method="POST" action="{{ route('register.post') }}">
+    @csrf
+    @if($errors->any())
+        <ul style="color:red;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
                     
                     <div class="form-group">
                         <label for="name"> Nombre completo </label>
