@@ -173,7 +173,9 @@ body::after{
 }
 
 .btn-primary{
-
+    display: block;
+    text-align: center;
+    text-decoration: none;
     border:none;
     cursor:pointer;
     background:var(--primary);

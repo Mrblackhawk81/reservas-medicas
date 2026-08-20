@@ -43,7 +43,7 @@
 
                 <p>Agenda tus consultas medicas de forma rapida, segura y desde cualquier lugar.</p>
 
-                <a href="{{ route('register') }}" class="btn"> Reserve una cita </a>
+                <a href="{{ route('login') }}" class="btn"> Reserve una cita </a>
             </section>
 
             <section id="nosotros">
@@ -58,50 +58,129 @@
             <section id="especialidades">
                 <h2>Especialidades</h2>
 
-                <div class="especialidades-grid">
-                    <!-- cards -->
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Medicina General</h3>
+                            <p>Atención y prevención para la familia.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Cardiología</h3>
+                            <p>Especialistas en el corazón.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Dermatología</h3>
+                            <p>Salud y cuidado de la piel.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Odontología</h3>
+                            <p>Cuidado para una sonrisa sana.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Medicina General</h3>
+                            <p>Atención y prevención para la familia.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Cardiología</h3>
+                            <p>Especialistas en el corazón.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Dermatología</h3>
+                            <p>Salud y cuidado de la piel.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">image</div>
+                            <h3>Odontología</h3>
+                            <p>Cuidado para una sonrisa sana.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section id="como-funciona">
                 <h2>Cómo Funciona</h2>
 
-                <ol>
-                    <li>Regístrate o inicia sesión.</li>
-                    <li>Selecciona la especialidad.</li>
-                    <li>Elige la fecha y hora disponibles.</li>
-                    <li>Confirma tu reserva.</li>
-                </ol>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon">image</div>
+                        <h3>1. Regístrate</h3>
+                        <p>Crea una cuenta gratuita o inicia sesión en nuestro portal de pacientes.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">image</div>
+                        <h3>2. Elige Especialidad</h3>
+                        <p>Selecciona el área médica o el doctor que necesitas consultar.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">image</div>
+                        <h3>3. Reserva tu Horario</h3>
+                        <p>Visualiza la agenda y escoge la fecha y hora que más te convengan.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">image</div>
+                        <h3>4. Confirma tu Cita</h3>
+                        <p>Verifica los datos y recibe la confirmación instantánea de tu reserva.</p>
+                    </div>
+                </div>
             </section>
 
             <section id="contacto">
                 <h2>Contacto</h2>
+                <p class="contacto-subtitle">¿Tienes alguna pregunta o necesitas ayuda? Estamos para atenderte.</p>
 
-                <p>¿Tienes alguna pregunta? Envíanos un mensaje.</p>
-
-                <form>
-                    @csrf
-
-                    <div class="form-group">
-                        <label for="nombre"> Nombre </label>
-
-                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" />
+                <div class="contacto-container">
+                    <div class="contacto-info">
+                        <div class="info-item">
+                            <span class="info-icon">📍</span>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>Av. Panamericana , Ciudad de Cochabamba</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">📞</span>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+591 75341223</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">✉️</span>
+                            <div>
+                                <h4>Correo</h4>
+                                <p>contacto@medcenter.com</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="correo"> Correo electrónico </label>
+                    <form class="contacto-form">
+                        @csrf
 
-                        <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com" />
-                    </div>
+                        <div class="form-group">
+                            <label for="nombre"> Nombre </label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="mensaje"> Mensaje </label>
+                        <div class="form-group">
+                            <label for="correo"> Correo electrónico </label>
+                            <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com" />
+                        </div>
 
-                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje"></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="mensaje"> Mensaje </label>
+                            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje"></textarea>
+                        </div>
 
-                    <button type="submit" class="btn">Enviar mensaje</button>
-                </form>
+                        <button type="submit" class="btn">Enviar mensaje</button>
+                    </form>
+                </div>
             </section>
         </main>
 

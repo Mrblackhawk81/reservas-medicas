@@ -56,7 +56,7 @@
                         <a href="#"> ¿Olvidaste tu contraseña? </a>
                     </div>
 
-                    <button type="submit" class="btn-primary">Iniciar sesión</button>
+                    <a href="{{ route('dashboard') }}" class="btn-primary">Iniciar sesión</a>
 
                     <p id="login-message"></p>
                 </form>
