@@ -11,7 +11,14 @@
         <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" />
     </head>
     <body>
-        <!-- Header -->
+        @php
+            $initials = collect(explode(' ', $user->name))
+                ->filter()
+                ->map(fn ($part) => mb_strtoupper(mb_substr($part, 0, 1)))
+                ->take(2)
+                ->implode('');
+        @endphp
+
         <header class="dashboard-header">
             <a href="{{ route('home') }}" class="logo">
                 <span class="logo-icon"></span>
@@ -24,9 +31,9 @@
                 </button>
                 <div class="user-dropdown">
                     <div class="avatar">
-                        <span style="font-size: 0.9rem;">TU</span>
+                        <span style="font-size: 0.9rem;">{{ $initials }}</span>
                     </div>
-                    <span class="user-name">Test User</span>
+                    <span class="user-name">{{ $user->name }}</span>
                     <span class="dropdown-arrow">
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </span>
@@ -36,44 +43,51 @@
         <main class="dashboard-main">
             <section class="welcome-section">
                 <div class="welcome-text">
-                    <h1>Hola, Test User</h1>
+                    <h1>Hola, {{ $user->name }}</h1>
                     <p>¿Qué necesitas hacer hoy?</p>
                 </div>
                 <button class="btn btn-primary-lg">Reservar una cita</button>
             </section>
             <section class="upcoming-appointment">
                 <h2>Próxima Cita</h2>
-                <div class="appointment-card">
-                    <div class="appointment-details">
-                        <div class="detail-item"><strong>Fecha:</strong> 25 de Agosto, 2026</div>
-                        <div class="detail-item"><strong>Hora:</strong> 10:00 AM</div>
-                        <div class="detail-item"><strong>Doctor:</strong> Dr. Test</div>
-                        <div class="detail-item"><strong>Especialidad:</strong> Cardiología</div>
-                        <div class="detail-item"><strong>Ubicación:</strong> Consultorio 12B</div>
+                @if($upcomingAppointment)
+                    <div class="appointment-card">
+                        <div class="appointment-details">
+                            <div class="detail-item"><strong>Fecha:</strong> {{ $upcomingAppointment->appointment_date->format('d/m/Y') }}</div>
+                            <div class="detail-item"><strong>Hora:</strong> {{ $upcomingAppointment->appointment_date->format('h:i A') }}</div>
+                            <div class="detail-item"><strong>Doctor:</strong> {{ $upcomingAppointment->doctor?->name ?? 'Sin doctor asignado' }}</div>
+                            <div class="detail-item"><strong>Especialidad:</strong> {{ $upcomingAppointment->doctor?->specialty ?? 'Sin especialidad' }}</div>
+                            <div class="detail-item"><strong>Ubicación:</strong> {{ $upcomingAppointment->doctor?->location ?? 'Sin ubicación' }}</div>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="btn btn-secondary">Ver detalles</button>
+                            <button class="btn btn-secondary">Reprogramar</button>
+                            <button class="btn btn-danger">Cancelar</button>
+                        </div>
                     </div>
-                    <div class="appointment-actions">
-                        <button class="btn btn-secondary">Ver detalles</button>
-                        <button class="btn btn-secondary">Reprogramar</button>
-                        <button class="btn btn-danger">Cancelar</button>
+                @else
+                    <div class="empty-state">
+                        <p>No tienes citas programadas en este momento.</p>
+                        <button class="btn btn-primary">Agendar nueva cita</button>
                     </div>
-                </div>
-
+                @endif
             </section>
 
+            <!-- Resumen -->
             <section class="summary-section">
                 <h2>Resumen</h2>
                 <div class="summary-grid">
                     <div class="summary-card">
                         <h3>Próximas</h3>
-                        <div class="summary-value">1</div>
+                        <div class="summary-value">{{ $summary['upcoming'] }}</div>
                     </div>
                     <div class="summary-card">
                         <h3>Completadas</h3>
-                        <div class="summary-value">12</div>
+                        <div class="summary-value">{{ $summary['completed'] }}</div>
                     </div>
                     <div class="summary-card">
                         <h3>Canceladas</h3>
-                        <div class="summary-value">0</div>
+                        <div class="summary-value">{{ $summary['cancelled'] }}</div>
                     </div>
                 </div>
             </section>
