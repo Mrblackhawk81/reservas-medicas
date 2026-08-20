@@ -73,7 +73,6 @@
                 @endif
             </section>
 
-            <!-- Resumen -->
             <section class="summary-section">
                 <h2>Resumen</h2>
                 <div class="summary-grid">
