@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 Route::get('/', function () {
@@ -10,64 +11,77 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/login', function () {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
-
     return view('login');
 })->name('login');
 
 Route::get('/register', function () {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
-
     return view('register');
 })->name('register');
 
 Route::get('/dashboard', function () {
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
+
     $user = Auth::user();
-    $appointments = $user->appointments()
-        ->with('doctor')
+
+    $upcomingAppointment = $user->appointments()
+        ->where('status', 'programada')
+        ->where('appointment_date', '>', now())
         ->orderBy('appointment_date')
-        ->get();
+        ->with('doctor')
+        ->first();
 
-    $upcomingAppointment = $appointments->first(function ($appointment) {
-        return $appointment->status === 'programada'
-            && $appointment->appointment_date->isFuture();
-    });
+    $upcomingCount = $user->appointments()
+        ->where('status', 'programada')
+        ->where('appointment_date', '>', now())
+        ->count();
 
-    $summary = [
-        'upcoming' => $appointments->filter(function ($appointment) {
-            return $appointment->status === 'programada'
-                && $appointment->appointment_date->isFuture();
-        })->count(),
-        'completed' => $appointments->where('status', 'completada')->count(),
-        'cancelled' => $appointments->where('status', 'cancelada')->count(),
-    ];
+    $completedCount = $user->appointments()
+        ->where('status', 'completada')
+        ->count();
 
-    return view('dashboard', compact('user', 'upcomingAppointment', 'summary'));
-})->middleware('auth')->name('dashboard');
+    $cancelledCount = $user->appointments()
+        ->where('status', 'cancelada')
+        ->count();
 
-// POST login
+    return view('dashboard', [
+        'user' => $user,
+        'upcomingAppointment' => $upcomingAppointment,
+        'summary' => [
+            'upcoming' => $upcomingCount,
+            'completed' => $completedCount,
+            'cancelled' => $cancelledCount,
+        ],
+    ]);
+})->name('dashboard');
+
 Route::post('/login', function (Request $request) {
-    $credentials = $request->validate([
+    $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    if (Auth::attempt($credentials, $request->boolean('remember'))) {
-        $request->session()->regenerate();
+    $user = User::where('email', $request->email)->first();
 
-        return redirect()->intended(route('dashboard'));
+    if (!$user) {
+        return back()
+            ->with('login_error', 'Credenciales incorrectas')
+            ->onlyInput('email');
     }
 
-    return back()
-        ->with('login_error', 'Credenciales incorrectas')
-        ->onlyInput('email');
+    if (!Hash::check($request->password, $user->password)) {
+        return back()
+            ->with('login_error', 'Credenciales incorrectas')
+            ->onlyInput('email');
+    }
+
+    Auth::login($user, $request->has('remember'));
+    $request->session()->regenerate();
+
+    return redirect('/dashboard');
 })->name('login.post');
 
-// POST register
 Route::post('/register', function (Request $request) {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
@@ -80,7 +94,7 @@ Route::post('/register', function (Request $request) {
         'name' => $validated['name'],
         'email' => $validated['email'],
         'phone' => $validated['phone'],
-        'password' => $validated['password'],
+        'password' => Hash::make($validated['password']),
     ]);
 
     Auth::login($user);
